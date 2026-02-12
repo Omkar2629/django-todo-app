@@ -9,7 +9,7 @@ class HomeView(ListView):
 
 class AddListView(CreateView):
     model = TodoList
-    fields = ['name']
+    fields = ['name', 'due_datetime']
     template_name = 'todo/add_list.html'
     success_url = reverse_lazy('home')
 
@@ -20,7 +20,7 @@ class DeleteListView(DeleteView):
 
 class AddTaskView(CreateView):
     model = Task
-    fields = ['todolist', 'title']
+    fields = ['todolist', 'title', 'due_datetime']
     template_name = 'todo/add_task.html'
     success_url = reverse_lazy('home')
 

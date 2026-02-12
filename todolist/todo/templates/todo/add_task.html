@@ -51,7 +51,14 @@
 
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.todolist.label }}<br>
+{{ form.todolist }}<br><br>
+
+{{ form.title.label }}<br>
+{{ form.title }}<br><br>
+
+<label>Due Date & Time</label><br>
+<input type="datetime-local" name="due_datetime"><br><br>
         <button type="submit">Add Task</button>
     </form>
 

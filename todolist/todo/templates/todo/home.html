@@ -40,6 +40,12 @@
             border-radius: 6px;
         }
 
+        .due {
+            font-size: 12px;
+            color: #bbbbbb;
+            margin-top: 3px;
+        }
+
         button {
             background-color: #00ffcc;
             border: none;
@@ -74,10 +80,22 @@
             <a href="{% url 'delete_list' list.id %}">🗑</a>
         </h2>
 
+        {% if list.due_datetime %}
+            <div class="due">
+                ⏰ List Due: {{ list.due_datetime|date:"M d, Y - h:i A" }}
+            </div>
+        {% endif %}
+
         {% for task in list.tasks.all %}
             <div class="task">
-                {{ task.title }}
+                <b>{{ task.title }}</b>
                 <a href="{% url 'delete_task' task.id %}">❌</a>
+
+                {% if task.due_datetime %}
+                    <div class="due">
+                        ⏳ Task Due: {{ task.due_datetime|date:"M d, Y - h:i A" }}
+                    </div>
+                {% endif %}
             </div>
         {% empty %}
             <p>No tasks yet</p>
