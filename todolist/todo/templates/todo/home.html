@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo App</title>
+
+    <style>
+        body {
+            background-color: #0f0f0f;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        a {
+            color: #00ffcc;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .list-box {
+            background-color: #1c1c1c;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+
+        .task {
+            background-color: #2a2a2a;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 6px;
+        }
+
+        button {
+            background-color: #00ffcc;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #00ccaa;
+        }
+
+        .top-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>📝 My Todo Lists</h1>
+
+<div class="top-buttons">
+    <a href="{% url 'add_list' %}">➕ Add List</a>
+    <a href="{% url 'add_task' %}">➕ Add Task</a>
+</div>
+
+{% for list in lists %}
+    <div class="list-box">
+        <h2>
+            {{ list.name }}
+            <a href="{% url 'delete_list' list.id %}">🗑</a>
+        </h2>
+
+        {% for task in list.tasks.all %}
+            <div class="task">
+                {{ task.title }}
+                <a href="{% url 'delete_task' task.id %}">❌</a>
+            </div>
+        {% empty %}
+            <p>No tasks yet</p>
+        {% endfor %}
+    </div>
+{% endfor %}
+
+</body>
+</html>
